@@ -1,0 +1,17 @@
+.noprint {
+    display: none;
+}
+
+h1, #h, #f {
+    display: none;
+}
+
+body {
+    background: #FFF;
+    color:#000;
+}
+
+a {
+    text-decoration: underline;
+    color:#00F;
+}
