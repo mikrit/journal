@@ -91,11 +91,27 @@
 
 <table class="table_print" id="border">
 	<tr>
-		<td width="50%" align="center">
+		<td width="50%" align="center" id="border_right">
 			<br/>
 			<?=HTML::image('media/img/logo2.png', array('id' => 'print_img'))?>
+			<br/>
+			ФИО: <b><?=$data->patient->fio?></b>
+			<br/><br/>
+			Наименование исследования: <b>
+				<br/>
+				<?
+				for($i=0; $i < $analizis_count-1; $i++)
+				{
+					echo $analizis[$i]->title.", ";
+				}
+				echo $analizis[$i]->title;
+				?></b>
+			<br/><br/>
+			№ исследования: <b><?=$data->number_a?></b>
 		</td>
-		<td width="50%" align="center" rowspan="2">
+		<td width="50%" align="center" rowspan="2" id="left_row">
+			<br/>
+			<?=HTML::image('media/img/logo2.png', array('id' => 'print_img_'))?>
 			<br/>
 			ООО «КОД-МЕД-БИО»<br/>
 			г.Москва, Каширское шоссе д.23<br/>
@@ -105,24 +121,21 @@
 			Пн.-Птн.: с 10.00 до 16.00<br/>
 			<b>Тел. 8(499) 324-17-49</b><br/>
 			e-mail: labgenpat@mail.ru
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br/>
-			ФИО: <b><?=$data->patient->fio?></b>
 			<br/><br/>
-			Наименование исследования: <b>
+			ФИО: <b><?=$data->patient->fio?></b>
 			<br/>
-			<?
-			for($i=0; $i < $analizis_count-1; $i++)
-			{
-				echo $analizis[$i]->title.", ";
-			}
-			echo $analizis[$i]->title;
-			?></b>
+			Наименование исследования: <b>
+				<br/>
+				<?
+				for($i=0; $i < $analizis_count-1; $i++)
+				{
+					echo $analizis[$i]->title.", ";
+				}
+				echo $analizis[$i]->title;
+				?></b>
 			<br/><br/>
 			№ исследования: <b><?=$data->number_a?></b>
+			<br/>
 		</td>
 	</tr>
 </table>

@@ -603,3 +603,8 @@ select{
     border-bottom: 1px solid;
     margin-bottom: 40px;
 }
+
+#print_img_ {
+    height: 140px;
+    width: 75px;
+}
