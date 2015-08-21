@@ -558,7 +558,7 @@ select{
 .table_print{
     font-size: 25px;
     width: 100%;
-    margin-bottom: 70px;
+    margin-bottom: 35px;
 }
 
 .table_print td{
@@ -605,6 +605,6 @@ select{
 }
 
 #print_img_ {
-    height: 140px;
-    width: 75px;
+    height: 120px;
+    width: 70px;
 }

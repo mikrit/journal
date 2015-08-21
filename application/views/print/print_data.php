@@ -17,11 +17,15 @@
 			Наименование исследования:<b>
 			<br/>
 			<?
-			for($i=0; $i < $analizis_count-1; $i++)
-			{
-				echo $analizis[$i]->title.", ";
-			}
-			echo $analizis[$i]->title;
+				for($i=0; $i < $analizis_count-1; $i++)
+				{
+					echo $analizis[$i]->title.", ";
+				}
+				
+				if(isset($analizis[$i]))
+				{
+					echo $analizis[$i]->title;
+				}
 			?></b>
 		</td>
 		<td width="50%">
@@ -100,11 +104,14 @@
 			Наименование исследования: <b>
 				<br/>
 				<?
-				for($i=0; $i < $analizis_count-1; $i++)
-				{
-					echo $analizis[$i]->title.", ";
-				}
-				echo $analizis[$i]->title;
+					for($i=0; $i < $analizis_count-1; $i++)
+					{
+						echo $analizis[$i]->title.", ";
+					}
+					if(isset($analizis[$i]))
+					{
+						echo $analizis[$i]->title;
+					}
 				?></b>
 			<br/><br/>
 			№ исследования: <b><?=$data->number_a?></b>
@@ -127,11 +134,14 @@
 			Наименование исследования: <b>
 				<br/>
 				<?
-				for($i=0; $i < $analizis_count-1; $i++)
-				{
-					echo $analizis[$i]->title.", ";
-				}
-				echo $analizis[$i]->title;
+					for($i=0; $i < $analizis_count-1; $i++)
+					{
+						echo $analizis[$i]->title.", ";
+					}
+					if(isset($analizis[$i]))
+					{
+						echo $analizis[$i]->title;
+					}
 				?></b>
 			<br/><br/>
 			№ исследования: <b><?=$data->number_a?></b>
