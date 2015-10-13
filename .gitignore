@@ -1,4 +1,8 @@
-.idea/
-application/config/*
-application/logs/*
+/.settings
+/application/config
+/application/logs
+/application/cache
 *.sql
+/modules/profilertoolbar
+.buildpath
+.project
