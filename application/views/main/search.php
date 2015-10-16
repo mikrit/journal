@@ -3,7 +3,7 @@
 	<div class="t-center">
 		<div id="title">Поиск</div>
 
-		<?=Form::open('search', array('method'=>'post'));?>
+		<?=Form::open('search', array('method'=>'get'));?>
 		<table class="t_form">
 			<tr>
 				<td>Год анализа:</td>
@@ -99,7 +99,7 @@
 				<?=date('d.m.Y', $number->date_add)?>
 			</td>
 		</tr>
-	<?}?>
+	<?$i++;}?>
 </table>
 
 <div id="pages" class="center"><?=$page_list?></div>

@@ -27,9 +27,9 @@ class Controller_Search extends Controller_Base
 		$count = ORM::factory('number')->select(array('patients.id', 'pid'), array('patients.fio', 'fio'));
 		$numbers = ORM::factory('number')->select(array('patients.id', 'pid'), array('patients.fio', 'fio'));
 
-		if($_POST)
+		if($_GET)
 		{
-			$data = $_POST;
+			$data = $_GET;
 
 			if($data['number_p'] != '')
 			{
