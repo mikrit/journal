@@ -64,12 +64,8 @@
 		</td>
 	</tr>
 	<? $i=1;
-	foreach($numbers as $number){
-		if($data['fio'] != '' && !preg_match('/'.mb_strtolower($data['fio']).'/', mb_strtolower($number->patient->fio)))
-		{
-			continue;
-		}
-		
+	foreach($numbers as $number)
+	{
 		$class = ($i%2==1)?'class="task_1"':'class="task_2"';?>
 		<tr <?=$class?>>
 			<td>
@@ -82,7 +78,7 @@
 				<?=Html::anchor('patient/data_analysis/'.$number->id, $number->number_a)?>
 			</td>
 			<td>
-				<?=Html::anchor('patient/data_patient/'.$number->patient->id, $number->patient->fio)?>
+				<?=Html::anchor('patient/data_patient/'.$number->pid, $number->fio)?>
 			</td>
 			<td>
 				<?=$number->patient->year?>
@@ -105,3 +101,5 @@
 		</tr>
 	<?}?>
 </table>
+
+<div id="pages" class="center"><?=$page_list?></div>

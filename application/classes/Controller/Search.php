@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Search extends Controller_Base {
-
+class Controller_Search extends Controller_Base
+{
 	public function action_index()
 	{
 		$data['fio'] = '';
@@ -24,34 +24,63 @@ class Controller_Search extends Controller_Base {
 			11 => 'ДМС',
 		);
 
-		$count = 0;
+		$count = ORM::factory('number')->select(array('patients.id', 'pid'), array('patients.fio', 'fio'));
+		$numbers = ORM::factory('number')->select(array('patients.id', 'pid'), array('patients.fio', 'fio'));
 
-		$numbers = ORM::factory('number');
-
-		if ($_POST)
+		if($_POST)
 		{
 			$data = $_POST;
 
 			if($data['number_p'] != '')
 			{
-				$numbers = $numbers->and_where('number_p', '=', $data['number_p']);
+				$count = $count->and_where('number.number_p', '=', $data['number_p']);
+				$numbers = $numbers->and_where('number.number_p', '=', $data['number_p']);
 			}
 
 			if($data['number_a'] != '')
 			{
-				$numbers = $numbers->and_where('number_a', '=', $data['number_a']);
+				$count = $count->and_where('number.number_a', '=', $data['number_a']);
+				$numbers = $numbers->and_where('number.number_a', '=', $data['number_a']);
+			}
+
+			if($data['fio'] != '')
+			{
+				$count = $count->and_where('patients.fio', 'LIKE', '%'.$data['fio'].'%');
+				$numbers = $numbers->and_where('patients.fio', 'LIKE', '%'.$data['fio'].'%');
 			}
 		}
 
-		$numbers = $numbers->and_where('date_add', '>=', mktime(0, 0, 0, 1, 1, $data['year']))->and_where('date_add', '<=', mktime(23, 59, 59, 12, 31, $data['year']))->order_by('number_p', 'desc');
+		$count = $count->and_where('number.date_add', '>=', mktime(0, 0, 0, 1, 1, $data['year']))
+			->and_where('number.date_add', '<=', mktime(23, 59, 59, 12, 31, $data['year']))
+			->join('patients', 'LEFT')
+			->on('number.patient_id', '=', 'patients.id')
+			->order_by('number_p', 'desc')
+			->count_all();
+
+		$pagination = Pagination::factory(array(
+			'total_items' => $count,
+			'items_per_page' => 50,
+			'view' => 'pagination/floating',
+		));
+
+		$numbers = $numbers->and_where('number.date_add', '>=', mktime(0, 0, 0, 1, 1, $data['year']))
+			->and_where('number.date_add', '<=', mktime(23, 59, 59, 12, 31, $data['year']))
+			->join('patients', 'LEFT')
+			->on('number.patient_id', '=', 'patients.id')
+			->limit($pagination->items_per_page)
+			->offset($pagination->offset)
+			->order_by('number_p', 'desc');
 
 		$view = View::factory('main/search');
 
+
+		$view->page_list = $pagination->render();
+		$view->start = $pagination->offset;
 		$view->numbers = $numbers->find_all();
+
+
 		$view->data = $data;
 		$view->statuses = $statuses;
-
 		$this->template->content = $view->render();
 	}
-
 } // End Welcome
