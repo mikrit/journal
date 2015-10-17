@@ -3,7 +3,7 @@
 <div class="noprint">
 	<div class="t-center">
 		<div id="title">Поиск</div>
-		<?=Form::open('patient', array('method'=>'post'));?>
+		<?=Form::open('patient', array('method'=>'get'));?>
 		<table class="t_form">
 			<tr>
 				<td>ФИО пациента:</td>
@@ -81,3 +81,5 @@
 		</tr>
 	<?}?>
 </table>
+
+<div id="pages" class="center"><?=$page_list?></div>

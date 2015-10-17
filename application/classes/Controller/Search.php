@@ -7,7 +7,6 @@ class Controller_Search extends Controller_Base
 		$data['fio'] = '';
 		$data['number_p'] = '';
 		$data['number_a'] = '';
-		$data['fio'] = '';
 		$data['year'] = date('Y');
 
 		$statuses = array(
@@ -29,21 +28,27 @@ class Controller_Search extends Controller_Base
 
 		if($_GET)
 		{
-			$data = $_GET;
+			foreach($data as $key => $val)
+			{
+				if(isset($_GET[$key]))
+				{
+					$data[$key] = $_GET[$key];
+				}
+			}
 
-			if($data['number_p'] != '')
+			if(isset($data['number_p']) && $data['number_p'] != '')
 			{
 				$count = $count->and_where('number.number_p', '=', $data['number_p']);
 				$numbers = $numbers->and_where('number.number_p', '=', $data['number_p']);
 			}
 
-			if($data['number_a'] != '')
+			if(isset($data['number_a']) && $data['number_a'] != '')
 			{
 				$count = $count->and_where('number.number_a', '=', $data['number_a']);
 				$numbers = $numbers->and_where('number.number_a', '=', $data['number_a']);
 			}
 
-			if($data['fio'] != '')
+			if(isset($data['fio']) && $data['fio'] != '')
 			{
 				$count = $count->and_where('patients.fio', 'LIKE', '%'.$data['fio'].'%');
 				$numbers = $numbers->and_where('patients.fio', 'LIKE', '%'.$data['fio'].'%');
@@ -73,14 +78,13 @@ class Controller_Search extends Controller_Base
 
 		$view = View::factory('main/search');
 
-
 		$view->page_list = $pagination->render();
 		$view->start = $pagination->offset;
+
 		$view->numbers = $numbers->find_all();
-
-
 		$view->data = $data;
 		$view->statuses = $statuses;
+
 		$this->template->content = $view->render();
 	}
 } // End Welcome
