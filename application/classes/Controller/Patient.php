@@ -7,29 +7,53 @@ class Controller_Patient extends Controller_Base {
 		$data['fio'] = '';
 		$data['year'] = '';
 
+		$count = ORM::factory('patient');
 		$patients = ORM::factory('patient');
 
-		if ($_POST)
+		if ($_GET)
 		{
-			$data = $_POST;
-
-			if($data['fio'] != '')
+			foreach($data as $key => $val)
 			{
+				if(isset($_GET[$key]))
+				{
+					$data[$key] = $_GET[$key];
+				}
+			}
+
+			if(isset($data['fio']) && $data['fio'] != '')
+			{
+				$count = $count->and_where('fio', 'LIKE', '%'.$data['fio'].'%');
 				$patients = $patients->and_where('fio', 'LIKE', '%'.$data['fio'].'%');
 			}
 
-			if($data['year'] != '')
+			if(isset($data['year']) && $data['year'] != '')
 			{
+				$count = $count->and_where('year', '=', $data['year']);;
 				$patients = $patients->and_where('year', '=', $data['year']);;
 			}
 		}
 
+		$count = $count->count_all();
+
+		$pagination = Pagination::factory(array(
+			'total_items' => $count,
+			'items_per_page' => 30,
+			'view' => 'pagination/floating',
+		));
+
+		$patients = $patients->order_by('id', 'desc')
+		->limit($pagination->items_per_page)
+		->offset($pagination->offset);
+
 		$view = View::factory('patient/list_patients');
 
-        $view->data = $data;
-        $view->patients = $patients->order_by('id', 'desc')->find_all();
-        
-        $this->template->content = $view->render();
+		$view->page_list = $pagination->render();
+		$view->start = $pagination->offset;
+
+		$view->data = $data;
+		$view->patients = $patients->find_all();
+
+		$this->template->content = $view->render();
 	}
 	
 	public function action_add_patient()
