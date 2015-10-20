@@ -1,9 +1,0 @@
-/.settings
-/application/config
-/application/logs
-/application/cache
-*.sql
-/modules/profilertoolbar
-.buildpath
-.project
-/.idea
