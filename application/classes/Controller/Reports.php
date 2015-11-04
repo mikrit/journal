@@ -192,65 +192,51 @@ class Controller_Reports extends Controller_Base
 
 	public function action_analysis()
 	{
-		/*$_count = ORM::factory('patient');
-		$patients = ORM::factory('patient');
+        $count = -1;
 
+        $data['to'] = time();
+        $data['from'] = time();
+        $data['analysis_id'] = 0;
+        $data['status_id'] = 0;
 
-		$errors = array();
-		$data['to'] = time();
-		$data['from'] = time();
-		$data['department'] = '';
-		$data['history'] = '';
-		$count = -1;
+        $analyzes = Helper::get_list_orm('analysis', 'title');
 
-		if ($_POST)
-		{
-			$data = $_POST;
+        $statuses = array();
 
-			$a = explode("-", $_POST['to']);
-			if($a[0] != ''){
-				$_POST['to'] = mktime(0,0,0,$a[1],$a[2],$a[0]);
-			}else{
-				$_POST['to'] = null;
-			}
+        if ($_POST)
+        {
+            $data = $_POST;
+            $a = explode("-", $_POST['to']);
+            if($a[0] != ''){
+                $_POST['to'] = mktime(0,0,0,$a[1],$a[2],$a[0]);
+            }else{
+                $_POST['to'] = null;
+            }
 
-			$a = explode("-", $_POST['from']);
-			if($a[0] != ''){
-				$_POST['from'] = mktime(23,59,59,$a[1],$a[2],$a[0]);
-			}else{
-				$_POST['from'] = null;
-			}
+            $a = explode("-", $_POST['from']);
+            if($a[0] != ''){
+                $_POST['from'] = mktime(23,59,59,$a[1],$a[2],$a[0]);
+            }else{
+                $_POST['from'] = null;
+            }
 
-			if($_POST['to'] == null || $_POST['from'] == null)
-			{
-				$errors = array(0 => 'Одна из дат не заполнена');
-			}
-			else
-			{
-				if($data['department'] != '')
-				{
-					$_count = $_count->and_where('department', 'LIKE', '%'.$data['department'].'%');
-					$patients = $patients->and_where('department', 'LIKE', '%'.$data['department'].'%');
-				}
+            if($_POST['to'] == null || $_POST['from'] == null)
+            {
+                $errors = array(0 => 'Одна из дат не заполнена');
+            }
+            else
+            {
 
-				if($data['history'] != '')
-				{
-					$_count = $_count->and_where('history', 'LIKE', '%'.$data['history'].'%');
-					$patients = $patients->and_where('history', 'LIKE', '%'.$data['history'].'%');
-				}
+            }
+        }
 
-				$count = $_count->and_where('date_add', '>=', $_POST['to'])->and_where('date_add', '<=', $_POST['from'])->count_all();
-				$patients = $patients->and_where('date_add', '>=', $_POST['to'])->and_where('date_add', '<=', $_POST['from'])->find_all();
-			}
-		}
+        $view = View::factory('reports/analysis');
 
-		$view = View::factory('reports/patients');
+        $view->data = $data;
+        $view->analyzes = $analyzes;
+        $view->statuses = $statuses;
+        $view->count = $count;
 
-		$view->data = $data;
-		$view->errors = $errors;
-		$view->patients = $patients;
-		$view->count = $count;
-
-		$this->template->content = $view->render();*/
+        $this->template->content = $view->render();
 	}
 }
