@@ -4,14 +4,13 @@
 <head>
 	<?=Html::style('media/css/style.css')?>
 	<?=Html::style('media/css/date_input.css')?>
-	<?=Html::style('media/css/prettyPhoto.css')?>
 	<?=Html::style('media/css/print.css', array('media' => 'print'))?>
 
 
 	<?=Html::script('media/js/jquery.js')?>
 	<?=Html::script('media/js/jquery.date_input.js')?>
-	<?=Html::script('media/js/jquery.prettyPhoto.js')?>
 	<?=Html::script('media/js/tinymce/tinymce.min.js')?>
+	<?=Html::script('media/js/project.js')?>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title>Журнал пациентов</title>

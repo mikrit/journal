@@ -4,7 +4,7 @@ class Controller_Ajax extends Controller
 {
 	public function action_stat()
 	{
-		$tatuses = array(
+		$statuses = array(
 			1 => 'Зарегистрирован, в ожидании обработки',
 			2 => 'Материал на отборе',
 			3 => 'В работе',
@@ -24,11 +24,11 @@ class Controller_Ajax extends Controller
 			
 			$post = Validation::factory($_POST);
 			
-			$_POST['status'] = (($task->status + 1) % 12) ? $task->status + 1 : 1; //7 - колличество статусов
+			$_POST['status'] = (($task->status + 1) % 12) ? $task->status + 1 : 1; //12 - колличество статусов
 			
 			$task->values($_POST)->update($post);
 			
-			echo "<img src='/media/img/".$_POST['status'].".png' alt='".$tatuses[$_POST['status']]."' title='".$tatuses[$_POST['status']]."' />";
+			echo "<img src='/media/img/".$_POST['status'].".png' alt='".$statuses[$_POST['status']]."' title='".$statuses[$_POST['status']]."'/>";
 		}
 	}
 }

@@ -346,29 +346,3 @@ $.date_input = { initialize: function(opts) {
 
 return DateInput;
 })(jQuery);
-
-function change_status(id){
-	$.ajax({
-		type: "POST",
-		url: "/ajax/stat",
-		data: {id:id},
-		success: function(data){
-			document.getElementById(id).innerHTML = data;
-		},
-		error: function(data){
-			alert("Ошибка смены статуса");
-		}
-	});
-};
-
-function filter(act) 
-{ 
-   document.forms.task.status.value = act;
-   document.task.submit();
-}
-	
-function SubMail(val)
-{ 
-	document.forms.sub_remove.sub.value = val;
-	document.sub_remove.submit();
-}
