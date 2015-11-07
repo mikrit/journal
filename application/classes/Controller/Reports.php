@@ -7,7 +7,7 @@ class Controller_Reports extends Controller_Base
 		$this->template->content = View::factory('reports/index')->render();
 	}
 
-	public function action_explores()
+	/*public function action_explores()
 	{
 		$numbers = ORM::factory('number');
 
@@ -127,7 +127,7 @@ class Controller_Reports extends Controller_Base
 		$view->count = $count;
 
 		$this->template->content = $view->render();
-	}
+	}*/
 
 	public function action_patients()
 	{

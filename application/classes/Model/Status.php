@@ -9,6 +9,14 @@ class Model_Status extends ORM
 		),
 	);
 
+    protected $_has_many = array(
+        'numbers'  => array(
+            'model'       => 'number',
+            'through' => 'analyzes_numbers',
+            'foreign_key' => 'status_id',
+        )
+    );
+
     public static function validation_status($values)
     {
         return Validation::factory($values)

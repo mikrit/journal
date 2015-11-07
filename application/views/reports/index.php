@@ -5,8 +5,8 @@
 <table id="user">
 	<tr>
 		<td>
-			<?=Html::anchor('reports/explores', 'По исследованиям');?>
-			<br/>
+			<?Html::anchor('reports/explores', 'По исследованиям');?>
+			<!--br/-->
 			<?=Html::anchor('reports/patients', 'По пациенту');?>
 			<br/>
 			<?=Html::anchor('reports/analysis', 'По анализу и статату');?>

@@ -73,7 +73,7 @@
 					<?=$analises?>
 				</td>
 				<td>
-					<?=$status?>
+                    <?=$number->statuses->where('status.analysis_id', '=', $data['analysis_id'])->find()->status?>
 				</td>
 				<td>
 					<?=date('d.m.Y', $number->date_add)?>

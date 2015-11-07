@@ -67,7 +67,7 @@
 	foreach($numbers as $number)
 	{
 		$class = ($i%2==1)?'class="task_1"':'class="task_2"';?>
-		<tr <?=$class?>>
+		<tr>
 			<td>
 				<?=$number->number_p?>
 			</td>
