@@ -192,20 +192,32 @@ class Controller_Reports extends Controller_Base
 
 	public function action_analysis()
 	{
+		$_count = ORM::factory('number');
+		$numbers = ORM::factory('number');
+
         $count = -1;
 
         $data['to'] = time();
         $data['from'] = time();
-        $data['analysis_id'] = 0;
         $data['status_id'] = 0;
 
         $analyzes = Helper::get_list_orm('analysis', 'title');
 
-        $statuses = array();
+		foreach ($analyzes as $k => $v)
+		{
+			$data['analysis_id'] = $k;
+			break;
+		}
 
         if ($_POST)
         {
+			if(!isset($_POST['status_id']))
+			{
+				$_POST['status_id'] = 0;
+			}
+
             $data = $_POST;
+
             $a = explode("-", $_POST['to']);
             if($a[0] != ''){
                 $_POST['to'] = mktime(0,0,0,$a[1],$a[2],$a[0]);
@@ -226,15 +238,59 @@ class Controller_Reports extends Controller_Base
             }
             else
             {
+				if($data['analysis_id'] != 0 || $data['status_id'] != 0)
+				{
+					$_count = $_count->join('analyzes_numbers')->on('analyzes_numbers.number_id', '=', 'number.id');
 
+					$numbers = $numbers->join('analyzes_numbers')->on('analyzes_numbers.number_id', '=', 'number.id');
+				}
+
+				if($data['analysis_id'] != 0)
+				{
+					$_count = $_count->join('analyzes')->on('analyzes.id', '=', 'analyzes_numbers.analysis_id');
+					$_count = $_count->and_where('analyzes.id', '=', $data['analysis_id']);
+
+					$numbers = $numbers->join('analyzes')->on('analyzes.id', '=', 'analyzes_numbers.analysis_id');
+					$numbers = $numbers->and_where('analyzes.id', '=', $data['analysis_id']);
+				}
+
+				if($data['status_id'] != 0)
+				{
+					$_count = $_count->join('statuses')->on('statuses.id', '=', 'analyzes_numbers.status_id');
+					$_count = $_count->and_where('statuses.id', '=', $data['status_id']);
+
+					$numbers = $numbers->join('statuses')->on('statuses.id', '=', 'analyzes_numbers.status_id');
+					$numbers = $numbers->and_where('statuses.id', '=', $data['status_id']);
+				}
+
+				$count = $_count->and_where('date_add', '>=', $_POST['to'])->and_where('date_add', '<=', $_POST['from'])->count_all();
+				$numbers = $numbers->and_where('date_add', '>=', $_POST['to'])->and_where('date_add', '<=', $_POST['from'])->find_all();
             }
         }
+
+		$orm = ORM::factory('status')->where('analysis_id', '=', $data['analysis_id'])->find_all();
+
+		$st[0] = '-';
+		foreach($orm as $val)
+		{
+			$st[$val->id] = $val->status;
+		}
+
+		$orm = ORM::factory('analysis', $data['analysis_id']);
+
+		$analises = $orm->title;
+
+		$status = $st[$data['status_id']];
+		$statuses = Form::select('status_id', $st, $data['status_id'], array('id' => 'statuses'));
 
         $view = View::factory('reports/analysis');
 
         $view->data = $data;
+        $view->numbers = $numbers;
         $view->analyzes = $analyzes;
+        $view->analises = $analises;
         $view->statuses = $statuses;
+        $view->status = $status;
         $view->count = $count;
 
         $this->template->content = $view->render();

@@ -31,4 +31,23 @@ class Controller_Ajax extends Controller
 			echo "<img src='/media/img/".$_POST['status'].".png' alt='".$statuses[$_POST['status']]."' title='".$statuses[$_POST['status']]."'/>";
 		}
 	}
+
+	public function action_get_list_statuses()
+	{
+		if(isset($_POST['analisis_id']))
+		{
+			$st = array();
+			$orm = ORM::factory('status')->where('analysis_id', '=', $_POST['analisis_id'])->find_all();
+
+			$st[0] = '-';
+			foreach($orm as $val)
+			{
+				$st[$val->id] = $val->status;
+			}
+
+			$statuses = Form::select('status_id', $st, 0, array('id' => 'statuses'));
+		}
+
+		echo json_encode($statuses);
+	}
 }

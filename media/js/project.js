@@ -14,38 +14,20 @@ function change_status(id){
 
 $(document).ready(function()
 {
-    $("#login_ajax").click(function()// при нажатии кнопки "Вход"
-    {
-        $("#error").hide();
-        $("#error").empty();
+    $("#analisis").change(function(){
+            var analisis_id = $('#analisis').val();
 
-        var l = Ladda.create(this).start();
-
-        var login = $('#login').val();
-        var password = $('#password').val();
-        var remember = $('input:checkbox:checked').val();
-
-        $.ajax({
-            type: "POST",
-            url: "auth/login",
-            dataType: "json",
-            data: {
-                login: login,
-                password: password,
-                remember: remember
-            },
-            success: function (result) {
-                if (result.code == 'error') // если вернулся статус с ошибкой
-                {
-                    var error = result.error;
-                    $("#error").append(error).show(); // показываем блок с сообщением об ошибке
-                    l.stop();
+            $.ajax({
+                type: "POST",
+                url: "/ajax/get_list_statuses",
+                dataType: "json",
+                data: {
+                    analisis_id: analisis_id
+                },
+                success: function (result) {
+                    $("#st").html(result);
                 }
-                if (result.code == 'success') // если вернулся статус без ошибки
-                {
-                    window.location.href = 'main';
-                }
-            }
-        });
-    });
+            });
+        }
+    );
 });
