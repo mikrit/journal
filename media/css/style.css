@@ -364,7 +364,7 @@ table, tr, td{
 	background-color: #F4Fcfc;
 }
 
-.task_1 img, .task_2 img{
+#proj_task2 img{
 	cursor:pointer;
 	height: 32px;
     width: 32px;
