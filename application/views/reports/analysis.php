@@ -41,7 +41,7 @@
     <table id="proj_task2">
         <tr id="head_tasks">
             <td colspan="5" style="text-align: left">
-                Колличество: <?=$count?>
+                Количество: <?=$count?>
             </td>
         </tr>
         <tr id="head_tasks">

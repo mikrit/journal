@@ -9,7 +9,7 @@
 			<!--br/-->
 			<?=Html::anchor('reports/patients', 'По пациенту');?>
 			<br/>
-			<?=Html::anchor('reports/analysis', 'По анализу и статату');?>
+			<?=Html::anchor('reports/analysis', 'По анализу и статусу');?>
 			<br/>
 		</td>
 	</tr>
