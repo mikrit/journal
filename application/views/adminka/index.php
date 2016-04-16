@@ -7,5 +7,10 @@
 		<td>
 			<?=Html::anchor('adminka/list_users', 'Сотрудники'); ?>
 		</td>
+    </tr>
+    <tr>
+        <td>
+            <?Html::anchor('adminka/logs', 'Логирование'); ?>
+        </td>
 	</tr>
 </table>

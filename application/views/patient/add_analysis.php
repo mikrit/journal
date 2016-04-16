@@ -63,7 +63,11 @@
 			</tr>
 			<tr>
 				<td>Развёрнутый диагноз:</td>
-				<td colspan="2"><?=Form::textarea('comment', $data['comment'], array('rows' => 6, 'cols' => 50));?></td>
+				<td colspan="2"><?=Form::textarea('comment', $data['comment'], array('id' => 'comment'));?></td>
+			</tr>
+			<tr>
+				<td>Развёрнутый диагноз:</td>
+				<td colspan="2"><?=Form::textarea('notes', $data['notes'], array('id' => 'notes'));?></td>
 			</tr>
 			<tr>
 				<td>Сотрудник 1:</td>

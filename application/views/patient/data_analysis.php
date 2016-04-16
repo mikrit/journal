@@ -91,6 +91,10 @@
 			<td style="height: 25px;">Сотрудник 3:</td>
 			<td><b><?=$data->user3->name?></b></td>
 		</tr>
+		<tr>
+			<td style="height: 25px;">Примечания:</td>
+			<td><b><?=$data->notes?></b></td>
+		</tr>
 	</table>
 	<br/><br/><br/>
 

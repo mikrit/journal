@@ -217,6 +217,7 @@ class Controller_Patient extends Controller_Base {
 		$data['material_count'] = '';
 		$data['method_id'] = 1;
 		$data['comment'] = '';
+		$data['notes'] = '';
 		$data['user1_id'] = 0;
 		$data['user2_id'] = 0;
 		$data['user3_id'] = 0;

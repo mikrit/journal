@@ -28,18 +28,21 @@
 	<? $i=1;
 	foreach($logs as $log){
 		$class = ($i%2==1)?'class="task_1"':'class="task_2"';?>
-		<tr <?=$class?>>
+		<tr>
 			<td>
 				<?=$log->date?>
 			</td>
 			<td>
-				<?=$log_name?>
+				<?=$log->user->name?>
 			</td>
 			<td>
-				<?=$user->username?>
+				<?=$log->table?>
 			</td>
 			<td>
-				<?=$user->position?>
+				<?=$log->before?>
+			</td>
+			<td>
+				<?=$log->after?>
 			</td>
 		</tr>
 	<?}?>
