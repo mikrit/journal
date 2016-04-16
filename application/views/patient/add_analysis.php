@@ -66,7 +66,7 @@
 				<td colspan="2"><?=Form::textarea('comment', $data['comment'], array('id' => 'comment'));?></td>
 			</tr>
 			<tr>
-				<td>Развёрнутый диагноз:</td>
+				<td>Примечания:</td>
 				<td colspan="2"><?=Form::textarea('notes', $data['notes'], array('id' => 'notes'));?></td>
 			</tr>
 			<tr>
