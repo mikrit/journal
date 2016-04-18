@@ -45,7 +45,7 @@
 </div>
 
 <?if($count == 0){?>
-	<center><h2>Ни чего не найдено</h2></center>
+	<center><h2>Ничего не найдено</h2></center>
 <?}else if($count > 0){?>
 	<table id="proj_task2">
 		<tr id="head_tasks">
