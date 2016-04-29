@@ -200,6 +200,7 @@ class Controller_Reports extends Controller_Base
         $data['to'] = time();
         $data['from'] = time();
         $data['status_id'] = 0;
+        $data['notes'] = '';
 
         $analyzes = Helper::get_list_orm('analysis', 'title');
 
@@ -261,6 +262,12 @@ class Controller_Reports extends Controller_Base
 
 					$numbers = $numbers->join('statuses')->on('statuses.id', '=', 'analyzes_numbers.status_id');
 					$numbers = $numbers->and_where('statuses.id', '=', $data['status_id']);
+				}
+
+				if($data['notes'] != '')
+				{
+					$_count = $_count->and_where('notes', 'LIKE', '%'.$data['notes'].'%');
+					$numbers = $numbers->and_where('notes', 'LIKE', '%'.$data['notes'].'%');
 				}
 
 				$count = $_count->and_where('date_add', '>=', $_POST['to'])->and_where('date_add', '<=', $_POST['from'])->count_all();

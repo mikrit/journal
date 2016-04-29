@@ -44,7 +44,7 @@
 		</tr>
 		<tr>
 			<td>Диагноз:</td>
-			<td><?=Form::textarea('diagnosis', $data['diagnosis'], array('rows' => 10, 'cols' => 50));?></td>
+			<td><?=Form::textarea('diagnosis', $data['diagnosis'], array('id' => 'notes'));?></td>
 		</tr>
 		<tr>
 			<td class="right" colspan="2"><?=Form::input('submit', 'Обновить',array('id' => 'button', 'type'=>'submit'));?></td>
