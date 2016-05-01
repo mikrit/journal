@@ -36,12 +36,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>Примечания:</td>
-					<td colspan="2">
-						<?=Form::input('notes', $data['notes'], array('class' => 'input'));?>
-					</td>
-				</tr>
-				<tr>
 					<td class="right" colspan="3">
 						<?=Form::input('submit', 'Поиск',array('id' => 'button', 'type'=>'submit'));?>
 					</td>
@@ -78,9 +72,6 @@
 			<td>
 				Дата приёма
 			</td>
-			<td>
-				Примечания
-			</td>
 		</tr>
 		<?foreach($numbers as $number){?>
 			<tr>
@@ -98,9 +89,6 @@
 				</td>
 				<td>
 					<?=date('d.m.Y', $number->date_add)?>
-				</td>
-				<td>
-					<?=$number->notes?>
 				</td>
 			</tr>
 		<?}?>

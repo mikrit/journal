@@ -11,6 +11,8 @@
 			<br/>
 			<?=Html::anchor('reports/analysis', 'По анализу и статусу');?>
 			<br/>
+			<?=Html::anchor('reports/notes', 'По примечаниям');?>
+			<br/>
 		</td>
 	</tr>
 </table>
