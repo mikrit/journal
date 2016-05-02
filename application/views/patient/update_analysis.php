@@ -15,7 +15,11 @@
 		<tr><td colspan="2" style="color: green"><?=$message?></td></tr>
 		<tr>
 			<td class="right" colspan="3">
-				<div id="edit"><?=Html::anchor('patient/data_analysis/'.$id, 'Назад')?></div>
+				<div id="edit">
+                    <?=Html::anchor('patient/data_patient/'.$patient->id, $patient->fio)?>
+                    |
+                    <?=Html::anchor('patient/data_analysis/'.$id, 'Назад')?>
+                </div>
 			</td>
 		</tr>
 		<tr>

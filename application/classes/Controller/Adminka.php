@@ -144,4 +144,14 @@ Enjoy your work.';
 		$view_profile->errors = $errors;
 		$this->template->content = $view_profile->render();
 	}
+
+    public function action_logs()
+    {
+        $logs = ORM::factory('log')->find_all();
+
+        $view = View::factory('adminka/logs');
+        $view->logs = $logs;
+
+        $this->template->content = $view->render();
+    }
 }

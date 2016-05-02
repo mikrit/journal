@@ -340,6 +340,8 @@ class Controller_Patient extends Controller_Base {
 			$this->redirect('/');
 		}
 
+        $patient = ORM::factory('patient', $data->patient_id);
+
 		$errors = array();
 		$message = "";
 		$data2 = $data->as_array();
@@ -438,6 +440,7 @@ class Controller_Patient extends Controller_Base {
 		$view->statuses = $statuses;
 		$view->methods = $methods;
 		$view->sings = $sings;
+		$view->patient = $patient;
 
 		$this->template->content = $view->render();
 	}

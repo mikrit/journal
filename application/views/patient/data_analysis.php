@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<td style="height: 25px; width: 15%;">Пациент:</td>
-			<td><b><?=$patient->fio?></b></td>
+			<td><b><?=Html::anchor('patient/data_patient/'.$patient->id, $patient->fio)?></b></td>
 		</tr>
 		<tr>
 			<td>Исследования:</td>
