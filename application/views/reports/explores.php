@@ -1,48 +1,48 @@
 <?php defined('SYSPATH') or die('No direct script access.');?>
-<div class="noprint">
-	<div class="t-center">
-		<div id="title">Поиск по исследованиям</div>
 
-		<?=Form::open('reports/explores', array('method'=>'post'));?>
-		<table class="t_form">
-			<tr>
-				<td class="right" colspan="3">
-					<div id="edit"><?=Html::anchor('reports', 'Назад')?></div>
-				</td>
-			</tr>
-			<tr>
-				<td>С:</td>
-				<td colspan="2"><?=Form::input('to', preg_match('/\d{6,}/', $data['to']) ? date('Y-m-d', $data['to']) : $data['to'], array('name' => 'date', 'class' => 'date_input'));?></td>
-			</tr>
-			<tr>
-				<td>По:</td>
-				<td colspan="2"><?=Form::input('from', preg_match('/\d{6,}/', $data['from']) ? date('Y-m-d', $data['from']) : $data['from'], array('name' => 'date', 'class' => 'date_input'));?></td>
-			</tr>
-			<tr>
-				<td>Статус гена:</td>
-				<td colspan="2"><?=Form::select('status_id', $statuses, $data['status_id']);?></td>
-			</tr>
-			<tr>
-				<td rowspan="<?=ceil(count($analyzes)/2)?>">Исследования:</td>
-				<?$i=0;foreach($analyzes as $k => $v){?>
-				<?$i++?>
-				<td>
-					<? echo Form::checkbox('analysis_'.$k, 1, $data['analysis_'.$k] == 0 ? false : true)." ".$v?>
-				</td>
-				<?if($i % 2 == 0){?>
-			</tr>
-			<tr>
-				<?}?>
-				<?}?>
-			</tr>
-			<tr>
-				<td class="right" colspan="3"><?=Form::input('submit', 'Поиск',array('id' => 'button', 'type'=>'submit'));?></td>
-			</tr>
-		</table>
-		<?=Form::close();?>
-	</div>
-	<br/><br/>
+<div class="t-center">
+	<div id="title">Поиск по исследованиям</div>
+
+	<?=Form::open('reports/explores', array('method'=>'post'));?>
+	<table class="t_form">
+		<tr>
+			<td class="right" colspan="3">
+				<div id="edit"><?=Html::anchor('reports', 'Назад')?></div>
+			</td>
+		</tr>
+		<tr>
+			<td>С:</td>
+			<td colspan="2"><?=Form::input('to', preg_match('/\d{6,}/', $data['to']) ? date('Y-m-d', $data['to']) : $data['to'], array('name' => 'date', 'class' => 'date_input'));?></td>
+		</tr>
+		<tr>
+			<td>По:</td>
+			<td colspan="2"><?=Form::input('from', preg_match('/\d{6,}/', $data['from']) ? date('Y-m-d', $data['from']) : $data['from'], array('name' => 'date', 'class' => 'date_input'));?></td>
+		</tr>
+		<tr>
+			<td>Статус гена:</td>
+			<td colspan="2"><?=Form::select('status_id', $statuses, $data['status_id']);?></td>
+		</tr>
+		<tr>
+			<td rowspan="<?=ceil(count($analyzes)/2)?>">Исследования:</td>
+			<?$i=0;foreach($analyzes as $k => $v){?>
+			<?$i++?>
+			<td>
+				<? echo Form::checkbox('analysis_'.$k, 1, $data['analysis_'.$k] == 0 ? false : true)." ".$v?>
+			</td>
+			<?if($i % 2 == 0){?>
+		</tr>
+		<tr>
+			<?}?>
+			<?}?>
+		</tr>
+		<tr>
+			<td class="right" colspan="3"><?=Form::input('submit', 'Поиск',array('id' => 'button', 'type'=>'submit'));?></td>
+		</tr>
+	</table>
+	<?=Form::close();?>
 </div>
+<br/><br/>
+
 
 <?if($count == 0){?>
 	<center><h2>Ничего не найдено</h2></center>
