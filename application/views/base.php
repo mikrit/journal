@@ -80,7 +80,7 @@
 		<tr>
 			<td id="f">
 				<div id="footer">
-				  <p>&copy;<?=date("Y")?> All Rights Reserved.</p>
+				  <p>&copy;2014-<?=date("Y")?> All Rights Reserved.</p>
 				</div>
 			</td>
 		</tr>

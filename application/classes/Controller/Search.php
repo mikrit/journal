@@ -53,6 +53,11 @@ class Controller_Search extends Controller_Base
 				$count = $count->and_where('patients.fio', 'LIKE', '%'.$data['fio'].'%');
 				$numbers = $numbers->and_where('patients.fio', 'LIKE', '%'.$data['fio'].'%');
 			}
+
+			if(!isset($_GET['year']) || $_GET['year'] == '')
+			{
+				$data['year'] = date('Y');
+			}
 		}
 
 		$count = $count->and_where('number.date_add', '>=', mktime(0, 0, 0, 1, 1, $data['year']))
